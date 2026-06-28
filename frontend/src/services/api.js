@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-const BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
-
+const BASE =
+  import.meta.env.VITE_API_BASE_URL ??
+  'https://legal-aid-ai-4.onrender.com'
 const api = axios.create({ baseURL: BASE, timeout: 45000 })
 
 api.interceptors.response.use(
