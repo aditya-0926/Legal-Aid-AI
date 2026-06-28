@@ -39,8 +39,8 @@ class Settings(BaseSettings):
 
     # ── Groq LLM ─────────────────────────────────────────────────────────
 # ── Groq LLM ─────────────────────────────────────────────────────────
-GROQ_API_KEY: Optional[str] = None
-LLM_MODEL: str = "llama-3.3-70b-versatile"
+    GROQ_API_KEY: Optional[str] = None
+    LLM_MODEL: str = "llama-3.3-70b-versatile"
 
     # ── Vector Store ─────────────────────────────────────────────────────
     VECTORSTORE_PATH: str = "data/vectorstore"
