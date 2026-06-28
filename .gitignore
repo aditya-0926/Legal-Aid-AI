@@ -12,7 +12,7 @@ backend/.env
 frontend/.env
 
 # Data & models
-backend/data/vectorstore/
+# backend/data/vectorstore/
 backend/data/raw/*.json
 *.pkl
 
