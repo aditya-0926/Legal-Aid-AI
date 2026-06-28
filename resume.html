@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resume — Legal Aid AI Project</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:       #0e1117;
+    --ink-light: #4a5568;
+    --paper:     #faf9f7;
+    --rule:      #e2ddd8;
+    --accent:    #1a4f8a;
+    --accent-2:  #c05621;
+    --chip-bg:   #eef2f8;
+    --chip-text: #1a4f8a;
+    --tag-bg:    #fff4ed;
+    --tag-text:  #9c3f0b;
+  }
+
+  html { font-size: 16px; background: var(--paper); color: var(--ink); }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.65;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 5rem;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────── */
+  .resume-header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .title-line {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    margin-top: 0.4rem;
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--ink-light);
+  }
+
+  .contact-row a { color: var(--accent); text-decoration: none; }
+  .contact-row a:hover { text-decoration: underline; }
+
+  /* ── SECTIONS ────────────────────────────────────────── */
+  section { margin-bottom: 2.4rem; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ── SUMMARY ─────────────────────────────────────────── */
+  .summary {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 680px;
+  }
+
+  /* ── PROJECT CARD ────────────────────────────────────── */
+  .project-card {
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 0 1.2rem 1.4rem;
+    margin-bottom: 1.6rem;
+    position: relative;
+  }
+
+  .project-card::before {
+    content: '';
+    width: 9px; height: 9px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    left: -6px; top: 1.6rem;
+  }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.18rem;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0.35rem 0 0.75rem;
+  }
+
+  .project-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+
+  .project-date {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+  }
+
+  .project-desc {
+    font-size: 0.92rem;
+    color: var(--ink-light);
+    margin-bottom: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* ── BULLET ACHIEVEMENTS ─────────────────────────────── */
+  .achievements {
+    list-style: none;
+    margin-bottom: 1rem;
+  }
+
+  .achievements li {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    padding: 0.25rem 0 0.25rem 1.2rem;
+    position: relative;
+    color: var(--ink);
+  }
+
+  .achievements li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ── TECH CHIPS ──────────────────────────────────────── */
+  .tech-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+  }
+
+  .chip {
+    background: var(--chip-bg);
+    color: var(--chip-text);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.22rem 0.6rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  .chip.orange {
+    background: var(--tag-bg);
+    color: var(--tag-text);
+  }
+
+  /* ── IMPACT STRIP ────────────────────────────────────── */
+  .impact-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1.2rem 0 0;
+  }
+
+  .impact-cell {
+    background: var(--paper);
+    padding: 0.85rem 1rem;
+    text-align: center;
+  }
+
+  .impact-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+  }
+
+  .impact-label {
+    font-size: 0.72rem;
+    color: var(--ink-light);
+    margin-top: 0.2rem;
+    display: block;
+    line-height: 1.3;
+  }
+
+  /* ── SKILLS ──────────────────────────────────────────── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .skill-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── EDUCATION / EXP ROW ─────────────────────────────── */
+  .entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .entry:last-child { border-bottom: none; }
+
+  .entry-left .degree {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  .entry-left .school {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    margin-top: 0.15rem;
+  }
+
+  .entry-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER RULE ─────────────────────────────────────── */
+  .footer-rule {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-light);
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  /* ── PRINT ───────────────────────────────────────────── */
+  @media print {
+    body { padding: 1.5rem; font-size: 11px; }
+    .project-card { break-inside: avoid; }
+    .impact-strip { break-inside: avoid; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 2rem 1.2rem 4rem; }
+    .contact-row { gap: 0.8rem; }
+    .entry { flex-direction: column; gap: 0.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════════ -->
+<header class="resume-header">
+  <h1 class="name">Your Full Name</h1>
+  <p class="title-line">Full Stack AI Engineer &nbsp;·&nbsp; RAG Systems &nbsp;·&nbsp; Social Impact Tech</p>
+  <div class="contact-row">
+    <span>📍 Mumbai, India</span>
+    <a href="mailto:you@email.com">you@email.com</a>
+    <a href="https://github.com/yourgithub" target="_blank">github.com/yourgithub</a>
+    <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
+    <span>📞 +91 98765 43210</span>
+  </div>
+</header>
+
+<!-- ══ SUMMARY ═════════════════════════════════════════════════ -->
+<section>
+  <p class="section-label">Profile</p>
+  <p class="summary">
+    Full Stack AI Engineer with hands-on experience building production-grade RAG pipelines, 
+    multilingual NLP systems, and FastAPI backends. Built and deployed <em>Legal Aid AI</em> — 
+    a free legal assistance platform for low-income Indian citizens, integrating Groq LLM, 
+    local FAISS vector search, and a 14-law built-in knowledge base covering 99 sections of 
+    Indian bare acts. Passionate about applying AI to high-impact social problems.
+  </p>
+</section>
+
+<!-- ══ FEATURED PROJECT ════════════════════════════════════════ -->
+<section>
+  <p class="section-label">Featured Project</p>
+
+  <div class="project-card">
+    <h2 class="project-title">Legal Aid AI — Multilingual RAG Legal Assistant</h2>
+    <div class="project-meta">
+      <span class="project-type">Full Stack · AI/ML · Social Impact</span>
+      <span class="project-date">2024 — Present</span>
+    </div>
+    <p class="project-desc">
+      End-to-end RAG system that helps low-income Indian citizens understand their legal rights 
+      in English, Hindi, and Marathi. Ships with a built-in knowledge base of 14 major Indian laws 
+      (Constitution, BNS, BNSS, RTI, Consumer Protection, Domestic Violence Act, and more) — 
+      works immediately after deployment with zero manual data entry.
+    </p>
+
+    <ul class="achievements">
+      <li>Built a <strong>production RAG pipeline</strong>: PDF ingestion → PyMuPDF parsing → RecursiveCharacterTextSplitter chunking → SentenceTransformer embeddings → FAISS vector search → Groq LLaMA-3 generation with structured citations (Act · Section · Page).</li>
+      <li>Designed and shipped a <strong>14-law built-in knowledge base</strong> (99 sections) covering Constitution of India, BNS 2023, BNSS 2023, BSA 2023, RTI Act, Consumer Protection Act, Domestic Violence Act, Labour Laws, Motor Vehicles Act, IT Act, Environmental Law, Property Law, Family Law, and Tenant Rights — available on day one with no uploads.</li>
+      <li>Implemented <strong>multilingual domain classification</strong> across 16 legal domains using keyword-scoring with 150+ English, Hindi, and Marathi triggers — 8/8 test cases correct without any ML model dependency.</li>
+      <li>Architected a <strong>live PDF ingestion admin API</strong> (`POST /admin/upload-law`) that parses, chunks, and merges new laws into the FAISS index at runtime — no server restart required.</li>
+      <li>Built a <strong>React 18 frontend</strong> with dark mode, multilingual UI (EN/HI/MR), auto-growing textarea, voice input via Groq Whisper, expandable source citations, NALSA center locator by GPS, and typing animation.</li>
+      <li>Designed the system to run <strong>entirely free</strong>: local `all-MiniLM-L6-v2` embeddings (no API key needed), Groq LLaMA-3 for generation (free tier), with graceful rule-based fallback when no key is configured.</li>
+      <li>Deployed with <strong>Docker + Nginx reverse proxy</strong>; Render-ready via `render.yaml`; rate-limited with in-memory middleware; CORS-configured for production origins.</li>
+    </ul>
+
+    <div class="impact-strip">
+      <div class="impact-cell">
+        <span class="impact-num">14</span>
+        <span class="impact-label">Indian Laws Built-in</span>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">99</span>
+        <span class="impact-label">Bare Act Sections</span>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">16</span>
+        <span class="impact-label">Legal Domains</span>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">3</span>
+        <span class="impact-label">Languages Supported</span>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">125</span>
+        <span class="impact-label">Source Files</span>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">$0</span>
+        <span class="impact-label">Cost to Run</span>
+      </div>
+    </div>
+
+    <div class="tech-row" style="margin-top:1rem;">
+      <span class="chip">FastAPI</span>
+      <span class="chip">LangChain</span>
+      <span class="chip">FAISS</span>
+      <span class="chip">SentenceTransformers</span>
+      <span class="chip">Groq LLaMA-3</span>
+      <span class="chip">Groq Whisper</span>
+      <span class="chip">PyMuPDF</span>
+      <span class="chip">Pydantic v2</span>
+      <span class="chip">React 18</span>
+      <span class="chip">Vite</span>
+      <span class="chip">Tailwind CSS</span>
+      <span class="chip">Zustand</span>
+      <span class="chip">Docker</span>
+      <span class="chip">Nginx</span>
+      <span class="chip orange">Python 3.11</span>
+      <span class="chip orange">REST API</span>
+      <span class="chip orange">RAG</span>
+      <span class="chip orange">NLP</span>
+    </div>
+
+    <p style="margin-top:0.9rem; font-size:0.82rem; color:var(--ink-light);">
+      GitHub: <a href="https://github.com/yourgithub/legal-aid-ai" style="color:var(--accent);">github.com/yourgithub/legal-aid-ai</a>
+      &nbsp;·&nbsp;
+      Live Demo: <a href="https://legal-aid-ai.onrender.com" style="color:var(--accent);">legal-aid-ai.onrender.com</a>
+    </p>
+  </div>
+</section>
+
+<!-- ══ SKILLS ══════════════════════════════════════════════════ -->
+<section>
+  <p class="section-label">Technical Skills</p>
+  <div class="skills-grid">
+    <div>
+      <p class="skill-group-label">AI / ML</p>
+      <div class="tech-row">
+        <span class="chip">RAG Pipelines</span>
+        <span class="chip">LangChain</span>
+        <span class="chip">FAISS</span>
+        <span class="chip">SentenceTransformers</span>
+        <span class="chip">LLM Integration</span>
+        <span class="chip">NLP</span>
+        <span class="chip">Vector Search</span>
+        <span class="chip">Prompt Engineering</span>
+      </div>
+    </div>
+    <div>
+      <p class="skill-group-label">Backend</p>
+      <div class="tech-row">
+        <span class="chip">FastAPI</span>
+        <span class="chip">Python 3.11</span>
+        <span class="chip">Pydantic v2</span>
+        <span class="chip">REST API Design</span>
+        <span class="chip">PyMuPDF</span>
+        <span class="chip">pytest</span>
+      </div>
+    </div>
+    <div>
+      <p class="skill-group-label">Frontend</p>
+      <div class="tech-row">
+        <span class="chip">React 18</span>
+        <span class="chip">Vite</span>
+        <span class="chip">Tailwind CSS</span>
+        <span class="chip">Zustand</span>
+        <span class="chip">JavaScript ES2023</span>
+      </div>
+    </div>
+    <div>
+      <p class="skill-group-label">DevOps / Infra</p>
+      <div class="tech-row">
+        <span class="chip">Docker</span>
+        <span class="chip">Nginx</span>
+        <span class="chip">Render</span>
+        <span class="chip">Git</span>
+        <span class="chip">Linux</span>
+      </div>
+    </div>
+    <div>
+      <p class="skill-group-label">LLM APIs</p>
+      <div class="tech-row">
+        <span class="chip">Groq</span>
+        <span class="chip">OpenAI SDK</span>
+        <span class="chip">Whisper STT</span>
+        <span class="chip">HuggingFace</span>
+      </div>
+    </div>
+    <div>
+      <p class="skill-group-label">Domain Knowledge</p>
+      <div class="tech-row">
+        <span class="chip orange">Indian Legal System</span>
+        <span class="chip orange">Multilingual NLP</span>
+        <span class="chip orange">Social Impact Tech</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EDUCATION ═══════════════════════════════════════════════ -->
+<section>
+  <p class="section-label">Education</p>
+
+  <div class="entry">
+    <div class="entry-left">
+      <p class="degree">Bachelor of Engineering — Computer Science</p>
+      <p class="school">Your University Name · Mumbai / Pune / Your City</p>
+    </div>
+    <div class="entry-right">2021 – 2025</div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-left">
+      <p class="degree">Relevant Coursework</p>
+      <p class="school">Machine Learning, Natural Language Processing, Database Systems, Web Development, Data Structures & Algorithms</p>
+    </div>
+    <div class="entry-right">CGPA: 8.x / 10</div>
+  </div>
+</section>
+
+<!-- ══ CERTIFICATIONS ══════════════════════════════════════════ -->
+<section>
+  <p class="section-label">Certifications &amp; Courses</p>
+
+  <div class="entry">
+    <div class="entry-left">
+      <p class="degree">Add yours here — e.g. Deep Learning Specialization</p>
+      <p class="school">Coursera / deeplearning.ai</p>
+    </div>
+    <div class="entry-right">2024</div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-left">
+      <p class="degree">Add yours here — e.g. Full Stack Web Development</p>
+      <p class="school">Udemy / freeCodeCamp / NPTEL</p>
+    </div>
+    <div class="entry-right">2023</div>
+  </div>
+</section>
+
+<!-- ══ WHAT THIS PROJECT DEMONSTRATES ════════════════════════ -->
+<section>
+  <p class="section-label">What This Project Demonstrates</p>
+  <ul class="achievements">
+    <li><strong>System design thinking:</strong> Modular pipeline with clear separation — ingestion, embedding, retrieval, generation, and presentation are all independent layers.</li>
+    <li><strong>Production mindset:</strong> Rate limiting, CORS, structured logging, graceful fallbacks, input validation, and Docker deployment — not just a notebook demo.</li>
+    <li><strong>Real-world constraints:</strong> Designed to work free of charge with no API key using local models, and scales up seamlessly when a key is added.</li>
+    <li><strong>Social impact framing:</strong> Targets a real problem (legal access gap for 80% of Indians who can't afford lawyers) with a measurable solution — deployed knowledge base, not a proof of concept.</li>
+    <li><strong>Full ownership:</strong> Backend, frontend, data engineering, DevOps, evaluation scripts, and documentation — entirely built solo.</li>
+  </ul>
+</section>
+
+<hr class="footer-rule" />
+<p class="footer-note">References available on request &nbsp;·&nbsp; Open to relocation &nbsp;·&nbsp; Available immediately</p>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { font-family: 'Inter', sans-serif; }
+  .font-display { font-family: 'Merriweather', serif; }
+}
+
+@layer utilities {
+  .prose p { @apply mb-2; }
+  .prose ul { @apply list-disc pl-5; }
+  .prose ol { @apply list-decimal pl-5; }
+  .prose strong { @apply font-semibold; }
+  .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+}

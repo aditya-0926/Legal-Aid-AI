@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: legal-aid-ai-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: EMBEDDING_PROVIDER
+        value: sentence_transformers
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: '["https://your-frontend.vercel.app"]'
