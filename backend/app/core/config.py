@@ -2,6 +2,7 @@
 Centralised configuration with validation and helpful startup errors.
 All settings are loaded from environment variables / .env file.
 """
+
 from __future__ import annotations
 
 import sys
@@ -13,10 +14,18 @@ from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+# ============================================================
+# Embedding Provider
+# ============================================================
+
 class EmbeddingProvider(str, Enum):
     SENTENCE_TRANSFORMERS = "sentence_transformers"
     BAAI_BGE = "baai_bge"
 
+
+# ============================================================
+# Application Settings
+# ============================================================
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -26,56 +35,91 @@ class Settings(BaseSettings):
         case_sensitive=False,
     )
 
-    # ── App ──────────────────────────────────────────────────────────────
+    # --------------------------------------------------------
+    # App
+    # --------------------------------------------------------
+
     APP_NAME: str = "Legal Aid AI"
     APP_VERSION: str = "2.0.0"
     DEBUG: bool = False
     LOG_LEVEL: str = "INFO"
 
-    # ── Embedding ────────────────────────────────────────────────────────
-    EMBEDDING_PROVIDER: EmbeddingProvider = EmbeddingProvider.SENTENCE_TRANSFORMERS
+    # --------------------------------------------------------
+    # Embedding
+    # --------------------------------------------------------
+
+    EMBEDDING_PROVIDER: EmbeddingProvider = (
+        EmbeddingProvider.SENTENCE_TRANSFORMERS
+    )
     EMBEDDING_MODEL_ST: str = "all-MiniLM-L6-v2"
     EMBEDDING_MODEL_BGE: str = "BAAI/bge-small-en-v1.5"
 
-    # ── Groq LLM ─────────────────────────────────────────────────────────
-# ── Groq LLM ─────────────────────────────────────────────────────────
+    # --------------------------------------------------------
+    # Groq
+    # --------------------------------------------------------
+
     GROQ_API_KEY: Optional[str] = None
+
+    # Current Groq-supported model
     LLM_MODEL: str = "llama-3.3-70b-versatile"
 
-    # ── Vector Store ─────────────────────────────────────────────────────
+    # --------------------------------------------------------
+    # Vector Database
+    # --------------------------------------------------------
+
     VECTORSTORE_PATH: str = "data/vectorstore"
     DATA_RAW_PATH: str = "data/raw"
     DATA_PROCESSED_PATH: str = "data/processed"
 
-    # ── RAG ──────────────────────────────────────────────────────────────
+    # --------------------------------------------------------
+    # RAG
+    # --------------------------------------------------------
+
     RETRIEVAL_TOP_K: int = 5
     CHUNK_SIZE: int = 900
     CHUNK_OVERLAP: int = 150
 
-    # ── Upload ───────────────────────────────────────────────────────────
+    # --------------------------------------------------------
+    # Upload
+    # --------------------------------------------------------
+
     MAX_UPLOAD_MB: int = 50
     ALLOWED_UPLOAD_EXTENSIONS: List[str] = [".pdf"]
 
-    # ── Rate limiting ────────────────────────────────────────────────────
+    # --------------------------------------------------------
+    # Rate Limiting
+    # --------------------------------------------------------
+
     RATE_LIMIT_PER_MINUTE: int = 30
 
-    # ── CORS ─────────────────────────────────────────────────────────────
+    # --------------------------------------------------------
+    # CORS
+    # --------------------------------------------------------
+
     ALLOWED_ORIGINS: List[str] = [
         "http://localhost:5173",
         "http://localhost:3000",
     ]
 
-    # ── Translation ──────────────────────────────────────────────────────
+    # --------------------------------------------------------
+    # Translation
+    # --------------------------------------------------------
+
     GOOGLE_TRANSLATE_API_KEY: Optional[str] = None
 
-    # ── Validators ───────────────────────────────────────────────────────
+    # ========================================================
+    # Validators
+    # ========================================================
+
     @field_validator("LOG_LEVEL")
     @classmethod
-    def validate_log_level(cls, v: str) -> str:
+    def validate_log_level(cls, value: str) -> str:
         valid = {"DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"}
-        if v.upper() not in valid:
+
+        if value.upper() not in valid:
             raise ValueError(f"LOG_LEVEL must be one of {valid}")
-        return v.upper()
+
+        return value.upper()
 
     @model_validator(mode="after")
     def warn_if_no_groq(self) -> "Settings":
@@ -86,9 +130,13 @@ class Settings(BaseSettings):
                 "Get a free key at https://console.groq.com",
                 file=sys.stderr,
             )
+
         return self
 
-    # ── Helpers ──────────────────────────────────────────────────────────
+    # ========================================================
+    # Helper Properties
+    # ========================================================
+
     @property
     def vectorstore_path(self) -> Path:
         return Path(self.VECTORSTORE_PATH)
@@ -106,12 +154,18 @@ class Settings(BaseSettings):
         return self.MAX_UPLOAD_MB * 1024 * 1024
 
 
+# ============================================================
+# Singleton
+# ============================================================
+
 _settings: Optional[Settings] = None
 
 
 def get_settings() -> Settings:
     global _settings
+
     if _settings is None:
         _settings = Settings()
         print("LLM MODEL =", _settings.LLM_MODEL)
+
     return _settings
