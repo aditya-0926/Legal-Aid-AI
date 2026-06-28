@@ -38,8 +38,9 @@ class Settings(BaseSettings):
     EMBEDDING_MODEL_BGE: str = "BAAI/bge-small-en-v1.5"
 
     # ── Groq LLM ─────────────────────────────────────────────────────────
-    GROQ_API_KEY: Optional[str] = None
-    LLM_MODEL: str = "llama3-8b-8192"
+# ── Groq LLM ─────────────────────────────────────────────────────────
+GROQ_API_KEY: Optional[str] = None
+LLM_MODEL: str = "llama-3.3-70b-versatile"
 
     # ── Vector Store ─────────────────────────────────────────────────────
     VECTORSTORE_PATH: str = "data/vectorstore"
@@ -112,4 +113,5 @@ def get_settings() -> Settings:
     global _settings
     if _settings is None:
         _settings = Settings()
+        print("LLM MODEL =", _settings.LLM_MODEL)
     return _settings
