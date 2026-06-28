@@ -34,7 +34,7 @@ class Settings(BaseSettings):
 
     # ── Embedding ────────────────────────────────────────────────────────
     EMBEDDING_PROVIDER: EmbeddingProvider = EmbeddingProvider.SENTENCE_TRANSFORMERS
-    EMBEDDING_MODEL_ST: str = "all-mpnet-base-v2"
+    EMBEDDING_MODEL_ST: str = "all-MiniLM-L6-v2"
     EMBEDDING_MODEL_BGE: str = "BAAI/bge-small-en-v1.5"
 
     # ── Groq LLM ─────────────────────────────────────────────────────────
